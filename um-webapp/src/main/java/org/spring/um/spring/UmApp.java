@@ -1,7 +1,8 @@
 package org.spring.um.spring;
 
-import org.springframework.boot.SpringApplication;
+import org.spring.um.persistence.setup.MyApplicationContextInitializer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Import;
 public class UmApp {
 
     public static void main(final String... args) {
-        SpringApplication.run(UmApp.class, args);
+        new SpringApplicationBuilder(UmApp.class).initializers(new MyApplicationContextInitializer()).listeners().run(args);
     }
 
 }
