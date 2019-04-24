@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 
 import com.spring.common.web.exception.MyConflictException;
-import com.spring.common.web.exceptions.ValidationException;
+import com.spring.common.web.exception.ValidationException;
 
 public final class RestUtil {
 

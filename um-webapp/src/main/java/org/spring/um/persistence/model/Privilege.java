@@ -1,22 +1,19 @@
 package org.spring.um.persistence.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.common.interfaces.INameableDto;
 import com.spring.common.persistence.model.INameableEntity;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @Entity
+@XmlRootElement
+@XStreamAlias("privilege")
 public class Privilege implements INameableEntity, INameableDto {
 
     @Id
@@ -25,16 +22,10 @@ public class Privilege implements INameableEntity, INameableDto {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    @NotNull
-    @Size(min=2, max=30)
     private String name;
 
     @Column(unique = false, nullable = true)
     private String description;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "privileges", fetch = FetchType.EAGER)
-    private Set<Role> roles;
 
     public Privilege() {
         super();
@@ -72,14 +63,6 @@ public class Privilege implements INameableEntity, INameableDto {
 
     public void setDescription(final String descriptionToSet) {
         description = descriptionToSet;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(final Set<Role> rolesToSet) {
-        roles = rolesToSet;
     }
 
     //

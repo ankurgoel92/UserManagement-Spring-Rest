@@ -2,19 +2,22 @@ package org.spring.um.util;
 
 public final class Um {
 
-    /**
-     * Privileges <br/>
-     * - note: the fact that these Privileges are prefixed with `ROLES` is a Spring convention (which can be overriden if needed)
-     */
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASS = "adminpass";
     public static final String ADMIN_EMAIL = "admin@fake.com";
+
+    public static final String USER_USERNAME = "user";
+    public static final String USER_PASS = "userpass";
+    public static final String USER_EMAIL = "user@fake.com";
 
     public static final String NAME = ADMIN_USERNAME;
     public static final String PASS = ADMIN_PASS;
     public static final String EMAIL = ADMIN_EMAIL;
 
-    // privileges
+    /**
+     * Privileges <br/>
+     * - note: the fact that these Privileges are prefixed with `ROLES` is a Spring convention (which can be overriden if needed)
+     */
 
     public static final class Privileges {
 
@@ -34,10 +37,8 @@ public final class Um {
 
     public static final class Roles {
 
-        /** A placeholder role for administrator. */
         public static final String ROLE_ADMIN = "ROLE_ADMIN";
-        /** A placeholder role for enduser. */
-        public static final String ROLE_ENDUSER = "ROLE_ENDUSER";
+        public static final String ROLE_USER = "ROLE_ENDUSER";
 
     }
 

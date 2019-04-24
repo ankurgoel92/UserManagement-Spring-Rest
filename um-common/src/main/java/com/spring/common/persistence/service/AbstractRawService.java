@@ -1,6 +1,7 @@
 package com.spring.common.persistence.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,8 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Override
     @Transactional(readOnly = true)
     public T findOne(final long id) {
-        return getDao().findOne(id);
+    	Optional<T> entity = getDao().findById(id);
+    	return entity.orElse(null);
     }
 
     // find - all
@@ -52,30 +54,30 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     @Transactional(readOnly = true)
     public Page<T> findAllPaginatedAndSortedRaw(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        return getDao().findAll(new PageRequest(page, size, sortInfo));
+        return getDao().findAll(PageRequest.of(page, size, sortInfo));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginatedAndSorted(final int page, final int size, final String sortBy, final String sortOrder) {
         final Sort sortInfo = constructSort(sortBy, sortOrder);
-        final List<T> content = getDao().findAll(new PageRequest(page, size, sortInfo)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, sortInfo)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
         return content;
     }
-
+    
     @Override
     @Transactional(readOnly = true)
-    public Page<T> findAllPaginatedRaw(final int page, final int size) {
-        return getDao().findAll(new PageRequest(page, size));
+    public Page<T> findAllPaginatedRaw(final int page, final int size) {       
+        return getDao().findAll(PageRequest.of(page, size));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<T> findAllPaginated(final int page, final int size) {
-        final List<T> content = getDao().findAll(new PageRequest(page, size, null)).getContent();
+        final List<T> content = getDao().findAll(PageRequest.of(page, size, null)).getContent();
         if (content == null) {
             return Lists.newArrayList();
         }
@@ -118,10 +120,11 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     @Override
     public void delete(final long id) {
-        final T entity = getDao().findOne(id);
-        ServicePreconditions.checkEntityExists(entity);
-
-        getDao().delete(entity);
+    	final Optional<T> entity = getDao().findById(id);
+    	if(entity.isPresent()) {
+    		ServicePreconditions.checkEntityExists(entity);
+    		getDao().delete(entity.get());	
+    	}
     }
 
     // count

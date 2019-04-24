@@ -3,12 +3,15 @@ package org.spring.um.web.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.spring.um.persistence.model.Role;
 import org.spring.um.service.IRoleService;
+import org.spring.um.util.Um.Privileges;
 import org.spring.um.util.UmMappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +39,7 @@ public class RoleController extends AbstractController<Role> implements ISorting
     @Override
     @RequestMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE, QueryConstants.SORT_BY }, method = RequestMethod.GET)
     @ResponseBody
+    @Secured(Privileges.CAN_ROLE_READ)
     public List<Role> findAllPaginatedAndSorted(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size, @RequestParam(value = QueryConstants.SORT_BY) final String sortBy,
             @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findPaginatedAndSortedInternal(page, size, sortBy, sortOrder);
@@ -44,6 +48,7 @@ public class RoleController extends AbstractController<Role> implements ISorting
     @Override
     @RequestMapping(params = { QueryConstants.PAGE, QueryConstants.SIZE }, method = RequestMethod.GET)
     @ResponseBody
+    @Secured(Privileges.CAN_ROLE_READ)
     public List<Role> findAllPaginated(@RequestParam(value = QueryConstants.PAGE) final int page, @RequestParam(value = QueryConstants.SIZE) final int size) {
         return findPaginatedInternal(page, size);
     }
@@ -51,6 +56,7 @@ public class RoleController extends AbstractController<Role> implements ISorting
     @Override
     @RequestMapping(params = { QueryConstants.SORT_BY }, method = RequestMethod.GET)
     @ResponseBody
+    @Secured(Privileges.CAN_ROLE_READ)
     public List<Role> findAllSorted(@RequestParam(value = QueryConstants.SORT_BY) final String sortBy, @RequestParam(value = QueryConstants.SORT_ORDER) final String sortOrder) {
         return findAllSortedInternal(sortBy, sortOrder);
     }
@@ -58,6 +64,7 @@ public class RoleController extends AbstractController<Role> implements ISorting
     @Override
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
+    @Secured(Privileges.CAN_ROLE_READ)
     public List<Role> findAll(final HttpServletRequest request) {
         return findAllInternal(request);
     }
@@ -66,6 +73,7 @@ public class RoleController extends AbstractController<Role> implements ISorting
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
+    @Secured(Privileges.CAN_ROLE_READ)
     public Role findOne(@PathVariable("id") final Long id) {
         return findOneInternal(id);
     }
@@ -74,7 +82,8 @@ public class RoleController extends AbstractController<Role> implements ISorting
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody final Role resource) {
+    @Secured(Privileges.CAN_ROLE_WRITE)
+    public void create(@RequestBody @Valid final Role resource) {
         createInternal(resource);
     }
 
@@ -82,7 +91,8 @@ public class RoleController extends AbstractController<Role> implements ISorting
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("id") final Long id, @RequestBody final Role resource) {
+    @Secured(Privileges.CAN_ROLE_WRITE)
+    public void update(@PathVariable("id") final Long id, @RequestBody @Valid final Role resource) {
         updateInternal(id, resource);
     }
 
@@ -90,6 +100,7 @@ public class RoleController extends AbstractController<Role> implements ISorting
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Secured(Privileges.CAN_ROLE_WRITE)
     public void delete(@PathVariable("id") final Long id) {
         deleteByIdInternal(id);
     }

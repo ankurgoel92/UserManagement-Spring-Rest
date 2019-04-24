@@ -7,7 +7,9 @@ import com.spring.common.web.exception.MyConflictException;
 import com.spring.common.web.exception.MyResourceNotFoundException;
 
 /**
- * Simple static methods to be called at the start of your own methods to verify correct arguments and state. If the Precondition fails, an {@link HttpStatus} code is thrown
+ * Simple static methods to be called at the start of your own methods to verify
+ * correct arguments and state. If the Precondition fails, an {@link HttpStatus}
+ * code is thrown
  */
 public final class RestPreconditions {
 
@@ -53,7 +55,8 @@ public final class RestPreconditions {
     }
 
     /**
-     * Ensures that an object reference passed as a parameter to the calling method is not null.
+     * Ensures that an object reference passed as a parameter to the calling
+     * method is not null.
      *
      * @param reference
      *            an object reference

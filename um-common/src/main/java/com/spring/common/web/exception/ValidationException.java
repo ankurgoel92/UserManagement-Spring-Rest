@@ -1,4 +1,4 @@
-package com.spring.common.web.exceptions;
+package com.spring.common.web.exception;
 
 /**
  * Thrown when validation conflict error is found. Message used to describe the validation error.
