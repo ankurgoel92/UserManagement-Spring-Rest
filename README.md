@@ -20,7 +20,7 @@ Create a new Maven run configuration and set the :
 |**um-common-test**  | holds common testing infrastructure that it not domain specific                                     |    
 |**um-common**       | holds common, generic infrastructure (utilities, abstract classes, etc) that are not domain specific|    
 |**um-client**       | holds the actual domain-specific client logic                                                       |    
-|**um-ui **          | holds the simple front-end app                                                                      |    
+|**um-ui**           | holds the simple front-end app                                                                      |    
 |**um-webapp**       | holds the actual, domain specific REST API                                                          |    
 
 ###### The front-end artifacts
