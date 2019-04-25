@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.spring.um.util.UmMappings;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -14,7 +13,8 @@ import com.google.common.net.HttpHeaders;
 import com.spring.common.util.LinkUtil;
 import com.spring.common.web.WebConstants;
 
-@Controller
+// @Controller
+// creates problems for OAuth2
 public class RootController {
 
     public RootController() {

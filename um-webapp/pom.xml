@@ -1,123 +1,125 @@
 <?xml version="1.0"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<name>um-webapp</name>
-	<artifactId>um-webapp</artifactId>
-	<packaging>jar</packaging>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.spring</groupId>
-		<artifactId>um-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
-<dependencies>
+    <artifactId>um-webapp</artifactId>
+    <packaging>jar</packaging>
 
-		<!-- internal -->
+    <name>um-webapp</name>
 
-		<dependency>
-			<groupId>org.spring</groupId>
-			<artifactId>um-common</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+    <parent>
+        <groupId>org.spring</groupId>
+        <artifactId>um-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-		<!-- web -->
+    <dependencies>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+        <!-- internal -->
 
-		<!-- security -->
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-
-		<!-- test scoped -->
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
+            <groupId>org.spring</groupId>
+            <artifactId>um-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spring</groupId>
+            <artifactId>um-common-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
-       </dependency>
+            <classifier>tests</classifier>
+        </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>org.spring</groupId>
+            <artifactId>um-common-test</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
 
-	<build>
-		<finalName>um-webapp</finalName>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
+        <dependency>
+            <groupId>org.spring</groupId>
+            <artifactId>um-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
-	</build>
+        <dependency>
+            <groupId>org.spring</groupId>
+            <artifactId>um-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
 
-	<profiles>
+        <!-- web -->
 
-		<profile>
-			<id>integration</id>
-			<build>
-				<plugins>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- test scoped -->
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>um-webapp</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+
+        <profile>
+            <id>integration</id>
+            <build>
+                <plugins>
 
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-								<configuration>
-									<excludes>
-										<exclude>none</exclude>
-									</excludes>
-									<includes>
-										<include>**/*IntegrationTest.java</include>
-									</includes>
-									<systemPropertyVariables>
-										<persistenceTarget>test</persistenceTarget>
-									</systemPropertyVariables>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <excludes>
+                                        <exclude>none</exclude>
+                                    </excludes>
+                                    <includes>
+                                        <include>**/*IntegrationTest.java</include>
+                                    </includes>
+                                    <systemPropertyVariables>
+                                        <persistenceTarget>test</persistenceTarget>
+                                    </systemPropertyVariables>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
 
-				</plugins>
-			</build>
-		</profile>
+                </plugins>
+            </build>
+        </profile>
 
-	</profiles>
+
+    </profiles>
 
 </project>
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<description>REST with Spring Parent</description>
@@ -16,16 +14,8 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.0.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-	<licenses>
-		<license>
-			<name>MIT License</name>
-			<url>http://www.opensource.org/licenses/mit-license.php</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
 
 	<developers>
 		<developer>
@@ -35,11 +25,6 @@
 			<id>ankurgoel92</id>
 		</developer>
 	</developers>
-
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://rest-security.ci.cloudbees.com/</url>
-	</ciManagement>
 
 	<build>
 
@@ -111,9 +96,13 @@
 		
 	</properties>
 
-	<modules>
-		<module>um-common</module>
-		<module>um-webapp</module>
-	</modules>
+    <modules>
+        <module>um-common</module>
+        <module>um-webapp</module>
+        <module>um-common-client</module>
+        <module>um-common-test</module>
+        <module>um-client</module>
+        <module>um-ui</module>
+    </modules>
 
 </project>

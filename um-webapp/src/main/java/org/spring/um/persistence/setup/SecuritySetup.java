@@ -4,12 +4,12 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spring.um.persistence.model.Principal;
 import org.spring.um.persistence.model.Privilege;
 import org.spring.um.persistence.model.Role;
-import org.spring.um.service.IPrincipalService;
+import org.spring.um.persistence.model.User;
 import org.spring.um.service.IPrivilegeService;
 import org.spring.um.service.IRoleService;
+import org.spring.um.service.IUserService;
 import org.spring.um.util.Um;
 import org.spring.um.util.Um.Privileges;
 import org.spring.um.util.Um.Roles;
@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.google.common.base.Preconditions;
@@ -36,16 +35,13 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
     private boolean setupDone;
 
     @Autowired
-    private IPrincipalService principalService;
+    private IUserService userService;
 
     @Autowired
     private IRoleService roleService;
 
     @Autowired
     private IPrivilegeService privilegeService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     public SecuritySetup() {
         super();
@@ -65,7 +61,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
 
             createPrivileges();
             createRoles();
-            createPrincipals();
+            createUsers();
 
             setupDone = true;
             logger.info("Setup Done");
@@ -123,21 +119,21 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
         }
     }
 
-    // Principal/User
+    // User/User
 
-    final void createPrincipals() {
+    final void createUsers() {
         final Role roleAdmin = roleService.findByName(Roles.ROLE_ADMIN);
         final Role roleUser = roleService.findByName(Roles.ROLE_USER);
 
-        createPrincipalIfNotExisting(Um.ADMIN_EMAIL, Um.ADMIN_PASS, Sets.<Role> newHashSet(roleAdmin));
-        createPrincipalIfNotExisting(Um.USER_EMAIL, Um.USER_PASS, Sets.<Role> newHashSet(roleUser));
+        createUserIfNotExisting(Um.ADMIN_EMAIL, Um.ADMIN_PASS, Sets.<Role> newHashSet(roleAdmin));
+        createUserIfNotExisting(Um.USER_EMAIL, Um.USER_PASS, Sets.<Role> newHashSet(roleUser));
     }
 
-    final void createPrincipalIfNotExisting(final String loginName, final String pass, final Set<Role> roles) {
-        final Principal entityByName = principalService.findByName(loginName);
+    final void createUserIfNotExisting(final String loginName, final String pass, final Set<Role> roles) {
+        final User entityByName = userService.findByName(loginName);
         if (entityByName == null) {
-            final Principal entity = new Principal(loginName, passwordEncoder.encode(pass), roles);
-            principalService.create(entity);
+            final User entity = new User(loginName, pass, roles);
+            userService.create(entity);
         }
     }
 

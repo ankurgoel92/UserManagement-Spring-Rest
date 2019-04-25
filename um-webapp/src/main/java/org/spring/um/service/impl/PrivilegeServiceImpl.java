@@ -15,7 +15,7 @@ import com.spring.common.persistence.service.AbstractService;
 public class PrivilegeServiceImpl extends AbstractService<Privilege> implements IPrivilegeService {
 
     @Autowired
-    private IPrivilegeJpaDao dao;
+    IPrivilegeJpaDao dao;
 
     public PrivilegeServiceImpl() {
         super();

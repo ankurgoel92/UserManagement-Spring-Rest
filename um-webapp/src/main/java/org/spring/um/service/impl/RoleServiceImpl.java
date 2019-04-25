@@ -15,7 +15,7 @@ import com.spring.common.persistence.service.AbstractService;
 public class RoleServiceImpl extends AbstractService<Role> implements IRoleService {
 
     @Autowired
-    private IRoleJpaDao dao;
+    IRoleJpaDao dao;
 
     public RoleServiceImpl() {
         super();
