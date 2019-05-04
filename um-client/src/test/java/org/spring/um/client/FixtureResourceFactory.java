@@ -14,7 +14,7 @@ public class FixtureResourceFactory {
         throw new AssertionError();
     }
 
-    // user
+    // User
 
     public static User createNewUser() {
         return createNewUser(randomAlphabetic(8), randomAlphabetic(8));

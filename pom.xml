@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
+    
+    <name>um-parent</name>
+    <url>https://github.com/ankurgoel92/UserManagement-Spring-Rest</url>
 	<description>REST with Spring Parent</description>
-	<name>um-parent</name>
 
 	<groupId>org.spring</groupId>
 	<artifactId>um-parent</artifactId>
@@ -17,6 +18,19 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+    <issueManagement>
+        <url>https://github.com/ankurgoel92/UserManagement-Spring-Rest/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+    
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
 	<developers>
 		<developer>
 			<email>ankurgoel.juit@gmail.com</email>
@@ -25,6 +39,12 @@
 			<id>ankurgoel92</id>
 		</developer>
 	</developers>
+    
+    <scm>
+        <connection>scm:git:git://github.com/ankurgoel92/UserManagement-Spring-Rest.git</connection>
+        <url>scm:git:git://github.com/ankurgoel92/UserManagement-Spring-Rest.git</url>
+        <developerConnection>scm:git:git://github.com/ankurgoel92/UserManagement-Spring-Rest.git</developerConnection>
+    </scm>
 
 	<build>
 
@@ -87,15 +107,11 @@
 		 
 		<!-- commons and utils -->
 		<guava.version>27.0-jre</guava.version>
-		<commons-lang3.version>3.8.1</commons-lang3.version>
-		
+		 
 		<rest-assured.version>3.2.0</rest-assured.version>
-		
-		<!-- marshalling -->  
-        <xstream.version>1.4.11.1</xstream.version> 
-		
-	</properties>
 
+	</properties>
+    
     <modules>
         <module>um-common</module>
         <module>um-webapp</module>

@@ -59,6 +59,15 @@ public class User implements INameableEntity, INameableDto {
         roles = rolesToSet;
     }
 
+    public User(final String name, final String email, final String password, final Set<Role> roles) {
+        super();
+
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
     // API
 
     @Override

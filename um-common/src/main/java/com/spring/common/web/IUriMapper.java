@@ -1,9 +1,9 @@
 package com.spring.common.web;
 
-import com.spring.common.persistence.model.IEntity;
+import com.spring.common.interfaces.IDto;
 
 public interface IUriMapper {
 
-    <T extends IEntity> String getUriBase(final Class<T> clazz);
+    <T extends IDto> String getUriBase(final Class<T> clazz);
 
 }

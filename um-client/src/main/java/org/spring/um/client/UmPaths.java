@@ -18,6 +18,9 @@ public final class UmPaths {
     @Value("${http.sec.path}")
     private String secPath;
 
+    @Value("${http.oauthPath}")
+    private String oauthPath;
+
     @Autowired
     private CommonPaths commonPaths;
 
@@ -44,6 +47,22 @@ public final class UmPaths {
 
     public final String getPrivilegeUri() {
         return getRootUri() + uriMapper.getUriBase(Privilege.class);
+    }
+
+    public final String getAuthenticationUri() {
+        return getRootUri() + "authentication";
+    }
+
+    public final String getLoginUri() {
+        return getContext() + "/j_spring_security_check";
+    }
+
+    public final String getPath() {
+        return secPath;
+    }
+
+    public final String getOauthPath() {
+        return oauthPath;
     }
 
 }

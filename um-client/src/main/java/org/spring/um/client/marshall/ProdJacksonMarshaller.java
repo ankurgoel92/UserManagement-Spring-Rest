@@ -84,10 +84,6 @@ public final class ProdJacksonMarshaller implements IMarshaller {
                 entities = objectMapper.readValue(resourcesAsString, new TypeReference<List<User>>() {
                     // ...
                 });
-            } else if (clazz.equals(User.class)) {
-                entities = objectMapper.readValue(resourcesAsString, new TypeReference<List<User>>() {
-                    // ...
-                });
             } else {
                 entities = objectMapper.readValue(resourcesAsString, List.class);
             }

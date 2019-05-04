@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 import com.spring.common.spring.CommonWebConfig;
 
 @Configuration
-@ComponentScan({ "org.spring.test.common" })
+@ComponentScan({ "com.baeldung.test.common" })
 @Import({ CommonClientConfig.class, CommonWebConfig.class })
 public class CommonTestConfig {
 

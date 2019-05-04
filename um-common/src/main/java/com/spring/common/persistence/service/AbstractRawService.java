@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.spring.common.interfaces.IWithName;
-import com.spring.common.persistence.ServicePreconditions;
+import com.spring.common.persistence.exception.MyEntityNotFoundException;
 
 @Transactional
 public abstract class AbstractRawService<T extends IWithName> implements IRawService<T> {
@@ -32,8 +32,6 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
     }
 
     // API
-
-    // search
 
     // find - one
 
@@ -122,11 +120,12 @@ public abstract class AbstractRawService<T extends IWithName> implements IRawSer
 
     @Override
     public void delete(final long id) {
-    	final Optional<T> entity = getDao().findById(id);
-    	if(entity.isPresent()) {
-    		ServicePreconditions.checkEntityExists(entity);
-    		getDao().delete(entity.get());	
-    	}
+        final Optional<T> entity = getDao().findById(id);
+        if(entity.isPresent()) {
+            getDao().delete(entity.get());  
+        } else {
+            throw new MyEntityNotFoundException();
+        }
     }
 
     // count

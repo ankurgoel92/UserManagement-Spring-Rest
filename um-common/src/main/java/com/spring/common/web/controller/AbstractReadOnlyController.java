@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.spring.common.interfaces.IWithName;
 import com.spring.common.persistence.service.IRawService;
+import com.spring.common.util.QueryConstants;
 import com.spring.common.web.RestPreconditions;
 import com.spring.common.web.WebConstants;
 import com.spring.common.web.events.MultipleResourcesRetrievedEvent;
@@ -36,7 +37,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
 
     @Autowired
     protected ApplicationEventPublisher eventPublisher;
-    
+
     public AbstractReadOnlyController(final Class<T> clazzToSet) {
         super();
 
@@ -69,7 +70,7 @@ public abstract class AbstractReadOnlyController<T extends IWithName> {
 
     protected final void findAllRedirectToPagination(final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         final String resourceName = clazz.getSimpleName().toString().toLowerCase();
-        final String locationValue = uriBuilder.path(WebConstants.PATH_SEP + resourceName).build().encode().toUriString() + "?" + "page=0&size=10";
+        final String locationValue = uriBuilder.path(WebConstants.PATH_SEP + resourceName).build().encode().toUriString() + QueryConstants.QUESTIONMARK + "page=0&size=10";
 
         response.setHeader(HttpHeaders.LOCATION, locationValue);
     }

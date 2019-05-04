@@ -1,5 +1,6 @@
 package org.spring.um.web.event;
 
+import org.spring.um.util.UmMappings;
 import org.springframework.stereotype.Component;
 
 import com.spring.common.web.listeners.ResourceCreatedDiscoverabilityListener;
@@ -15,7 +16,7 @@ class SecResourceCreatedDiscoverabilityListener extends ResourceCreatedDiscovera
 
     @Override
     protected final String getBase() {
-        return "/";
+        return UmMappings.BASE;
     }
 
 }

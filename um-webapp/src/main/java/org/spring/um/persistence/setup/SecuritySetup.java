@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.google.common.base.Preconditions;
@@ -25,7 +26,7 @@ import com.spring.common.spring.util.Profiles;
 
 /**
  * This simple setup class will run during the bootstrap process of Spring and will create some setup data <br>
- * The main focus here is creating some standard privileges, then roles and finally some default principals/users
+ * The main focus here is creating some standard privileges, then roles and finally some default users
  */
 @Component
 @Profile(Profiles.DEPLOYED)
@@ -42,6 +43,9 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
 
     @Autowired
     private IPrivilegeService privilegeService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public SecuritySetup() {
         super();
@@ -132,7 +136,7 @@ public class SecuritySetup implements ApplicationListener<ContextRefreshedEvent>
     final void createUserIfNotExisting(final String loginName, final String pass, final Set<Role> roles) {
         final User entityByName = userService.findByName(loginName);
         if (entityByName == null) {
-            final User entity = new User(loginName, pass, roles);
+            final User entity = new User(loginName, passwordEncoder.encode(pass), roles);
             userService.create(entity);
         }
     }

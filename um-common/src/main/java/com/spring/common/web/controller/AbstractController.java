@@ -15,7 +15,7 @@ public abstract class AbstractController<T extends INameableEntity> extends Abst
     public AbstractController(final Class<T> clazzToSet) {
         super(clazzToSet);
     }
-    
+
     // save/create/persist
 
     protected final void createInternal(final T resource, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {

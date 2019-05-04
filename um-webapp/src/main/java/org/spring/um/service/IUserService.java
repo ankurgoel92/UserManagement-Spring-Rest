@@ -6,4 +6,5 @@ import com.spring.common.persistence.service.IService;
 
 public interface IUserService extends IService<User> {
     //
+
 }

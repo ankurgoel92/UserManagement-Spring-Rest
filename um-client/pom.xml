@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <project
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
     xmlns="http://maven.apache.org/POM/4.0.0"
@@ -11,6 +10,7 @@
         <groupId>org.spring</groupId>
         <artifactId>um-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
 
     <dependencies>
@@ -31,31 +31,31 @@
     </dependencies>
 
     <build>
-        <finalName>um-client</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+		<finalName>um-client</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
-        <plugins>
+		<plugins>
+			
+			<!-- this create jar file of code from src/test/java so modules with tests can share code -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
 
-            <!-- this create jar file of code from src/test/java so modules with tests can share code -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-
-    </build>
+	</build>
 
 </project>
